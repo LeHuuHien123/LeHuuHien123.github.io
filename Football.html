@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Xem Bóng Đá</title>
+    <link rel="stylesheet" href="Ftball.css"> <!-- Liên kết file CSS -->
+    <script src="Fottball.js"></script> <!-- Liên kết file JavaScript -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="bongda.jpg" alt="Logo" class="logo">
+        </div>
+        <h1>Web Xem Bóng Đá</h1>
+        <div class="marquee-container">
+            <div class="marquee">
+                <span>Chào mừng bạn đến với website của chúng tôi! Hãy tận hưởng bóng đá nhé!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thanh điều hướng -->
+    <div class="crossbar">
+        <ul>
+            <li><a href="#" onclick="changeChannel('https://www.youtube.com/embed/LNsKZ_ZLdg8')">ánh tàn chiều </a></li>
+            <li><a href="#" onclick="changeChannel('https://www.youtube.com/embed/CCqLkd110p8')">em đã biết</a></li>
+            <li><a href="#" onclick="changeChannel('https://www.youtube.com/embed/9VgBD_ulNfo')">Forget me now</a></li>
+            <li><a href="#" onclick="changeChannel('https://www.youtube.com/embed/p6tzaUHPejk')">24h</a></li>
+        </ul>
+    </div>
+
+    <!-- Nội dung chính -->
+    <div class="content">
+        <div class="video-container">
+            <img id="default-image" src="c.jpg" alt="Default Image">
+            <iframe id="video-frame" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="ad-container">
+            <h3>Quảng Cáo</h3>
+            <img src="a (7).jpg" alt="Quảng Cáo">
+            <p>Đây là một quảng cáo. Click <a href="https://www.youtube.com/watch?v=Wyc-TrwG8A0" target="_blank">vào đây</a> để biết thêm chi tiết.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Web Xem Bóng Đá. Mọi quyền được bảo lưu.</p>
+    </footer>
+
+    <script>
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+/* Đặt chiều cao tối ưu cho body */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Bắt buộc chiều cao toàn màn hình */
+    background-color: #f4f4f4;
+}
+
+/* Phần header */
+header {
+    background-color: #006400;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Logo và tiêu đề */
+.logo-container {
+    flex-shrink: 0;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    border-radius: 100px;
+}
+
+h1 {
+    margin-left: 10px;
+}
+
+/* Thanh chạy chữ */
+.marquee-container {
+    margin-left: auto;
+    background-color: #006400;
+    padding: 5px;
+    border-radius: 5px;
+    width: 600px; /* Đặt chiều rộng cố định */
+    overflow: hidden; /* Ẩn phần dư */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.marquee {
+    display: inline-block; /* Nội dung trên một dòng */
+    white-space: nowrap; /* Không xuống dòng */
+    animation: marquee 10s linear infinite; /* Animation liên tục */
+}
+
+.marquee span {
+    font-size: 18px; /* Kích thước chữ */
+    color: #000000; /* Màu chữ */
+}
+
+/* Hiệu ứng chạy chữ */
+@keyframes marquee {
+    from {
+        transform: translateX(100%); /* Bắt đầu từ bên phải */
+    }
+    to {
+        transform: translateX(-100%); /* Kết thúc bên trái */
+    }
+}
+
+/* Thanh điều hướng */
+.crossbar {
+    background-color: #333;
+    padding: 10px;
+}
+
+.crossbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.crossbar ul li {
+    margin: 0 10px;
+}
+
+.crossbar ul li a {
+    text-decoration: none;
+    color: white;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.crossbar ul li a:hover {
+    background-color: #555;
+}
+
+/* Phần content chính */
+.content {
+    flex: 1; /* Giãn ra để chiếm không gian còn lại */
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Video */
+.video-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container img {
+    width: 100%;
+    height: auto;
+    max-width: 1000px;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 600px;
+    display: none;
+}
+
+/* Quảng cáo */
+.ad-container {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #006400;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
