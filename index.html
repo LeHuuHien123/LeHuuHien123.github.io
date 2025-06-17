@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Chủ</title>
+    <style>
+        body {
+            margin: 0; /* Loại bỏ khoảng cách bên ngoài của phần tử body. */
+            padding: 0; /* Loại bỏ khoảng cách bên trong của phần tử body. */
+            height: 100vh; /* Đặt chiều cao của phần tử body bằng 100% chiều cao của viewport. */
+            display: flex; /* Sử dụng Flexbox để bố trí các phần tử con. */
+            flex-direction: column; /* Đặt chiều dọc cho flexbox. */
+            justify-content: flex-start; /* Căn lề trên cùng của trang. */
+            align-items: flex-start; /* Căn lề trái của trang. */
+            background-image: url('a.jfif'); /* Đặt hình ảnh nền cho body. */
+            background-size: cover; /* Hình ảnh nền bao phủ toàn bộ không gian. */
+            background-position: center; /* Hình ảnh nền được căn giữa. */
+            background-repeat: no-repeat; /* Ngăn hình ảnh nền lặp lại nếu không đủ lớn. */
+            font-family: Arial, sans-serif; /* Đặt phông chữ mặc định cho toàn bộ trang. */
+            color: #333; /* Đặt màu chữ mặc định cho nội dung. */
+            overflow: hidden; /* Ngăn cuộn trang nếu có nội dung tràn ra ngoài. */
+        }
+        
+
+        /* Định dạng cho thanh điều hướng */
+        .navbar {
+            width: 100%; /* Đặt chiều rộng của thanh điều hướng bằng 100% */
+            background-color: #333333; /* Màu nền của thanh */
+            overflow: hidden; /* Giúp thanh hiển thị tốt hơn */
+        }
+
+        /* Định dạng cho các mục bên trong thanh */
+        .navbar a {
+            float: left; /* Canh trái cho các liên kết để tạo thành hàng ngang */
+            display: block;
+            color: white; /* Màu chữ */
+            text-align: center;
+            padding: 14px 20px; /* Khoảng cách trong cho các liên kết */
+            text-decoration: none; /* Loại bỏ gạch chân */
+        }
+        .navbar {
+    background-color: #333333; /* Màu nền của thanh */
+    overflow: hidden; /* Giúp thanh hiển thị tốt hơn */
+    position: relative; /* Thêm position relative cho thanh điều hướng */
+}
+
+.logout {
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    right: 20px; /* Đặt liên kết ở bên phải (có đơn vị) */
+    top: 0px; /* Đặt vị trí dọc nếu cần */
+    color: white; /* Màu chữ */
+    padding: 10px; /* Khoảng cách cho liên kết */
+    text-decoration: none; /* Loại bỏ gạch chân */
+}
+
+
+
+        /* Đổi màu khi di chuột qua các mục */
+        .navbar a:hover {
+            background-color: #575757; /* Đổi màu nền khi hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <div class="navbar">
+        <a href="#home">Trang Chủ</a>
+        <a href="Game.html">Game 1</a>
+        <a href="tank.html">Game 2</a>
+        <a href="https://www.youtube.com/watch?v=p46FT0JQPkg">Xin lỗi</a>
+        <a href="Football.html">Xem bóng đá</a>
+        <a class="logout" href="login.html">Đăng Xuất</a> <!-- Đặt Đăng Xuất ở đây -->
+    </div>
+
+</body>
+</html>

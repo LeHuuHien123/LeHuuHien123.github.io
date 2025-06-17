@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Battle Game with Auto-Aiming</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #gameArea {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #222;
+            border: 2px solid #333;
+        }
+        .tank {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+        }
+        #tank1 { background-color: blue; }
+        #tank2 { background-color: red; }
+        .bullet {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+        .obstacle {
+            position: absolute;
+            background-color: #8020da;
+        }
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameArea">
+        <div id="hud">
+            <div>Player 1 Score: <span id="score1">0</span></div>
+            <div>Player 2 Score: <span id="score2">0</span></div>
+        </div>
+        <div class="tank" id="tank1" style="top: 100px; left: 100px;"></div>
+        <div class="tank" id="tank2" style="top: 400px; left: 600px;"></div>
+
+        <!-- Các vật cản (đã gộp chung lại thành .obstacle) -->
+        <div class="obstacle" style="top: 50px; left: 150px; width: 30px; height: 200px;"></div>
+        <div class="obstacle" style="top: 300px; left: 400px; width: 30px; height: 200px;"></div>
+        <div class="obstacle" style="top: 200px; left: 600px; width: 30px; height: 200px;"></div>
+        <div class="obstacle" style="top: 100px; left: 200px; width: 300px; height: 30px;"></div>
+        <div class="obstacle" style="top: 400px; left: 100px; width: 300px; height: 30px;"></div>
+        <div class="obstacle" style="top: 500px; left: 450px; width: 300px; height: 30px;"></div>
+    </div>
+
+    <script>
+        
+        const movementSpeed = 5;
+const bulletSpeed = 8;
+let keysPressed = {};
+let score1 = 0;
+let score2 = 0;
+
+let tank1 = document.getElementById('tank1');
+let tank2 = document.getElementById('tank2');
+let gameArea = document.getElementById('gameArea');
+let score1Element = document.getElementById('score1');
+let score2Element = document.getElementById('score2');
+
+const obstacles = Array.from(document.querySelectorAll('.obstacle'));
+
+// Biến lưu thời gian bắn cuối cùng cho mỗi xe tăng
+let lastShotTime1 = 0;
+let lastShotTime2 = 0;
+
+// Kiểm tra va chạm với vật cản cho đạn
+function checkBulletCollision(bullet, dx, dy) {
+    const bulletRect = bullet.getBoundingClientRect();
+
+    for (let obstacle of obstacles) {
+        const obstacleRect = obstacle.getBoundingClientRect();
+
+        // Kiểm tra va chạm theo trục x
+        if (
+            bulletRect.right + dx > obstacleRect.left &&
+            bulletRect.left + dx < obstacleRect.right &&
+            bulletRect.top < obstacleRect.bottom &&
+            bulletRect.bottom > obstacleRect.top
+        ) {
+            dx = -dx; // Phản xạ theo trục x
+        }
+
+        // Kiểm tra va chạm theo trục y
+        if (
+            bulletRect.bottom + dy > obstacleRect.top &&
+            bulletRect.top + dy < obstacleRect.bottom &&
+            bulletRect.left < obstacleRect.right &&
+            bulletRect.right > obstacleRect.left
+        ) {
+            dy = -dy; // Phản xạ theo trục y
+        }
+    }
+
+    return { dx, dy };
+}
+
+// Di chuyển xe tăng và kiểm tra va chạm
+function checkTankCollision(tank, dx, dy) {
+    const tankRect = tank.getBoundingClientRect();
+
+    for (let obstacle of obstacles) {
+        const obstacleRect = obstacle.getBoundingClientRect();
+
+        // Kiểm tra va chạm theo hướng x
+        if (
+            tankRect.left + dx < obstacleRect.right &&
+            tankRect.right + dx > obstacleRect.left &&
+            tankRect.top < obstacleRect.bottom &&
+            tankRect.bottom > obstacleRect.top
+        ) {
+            dx = 0;
+        }
+
+        // Kiểm tra va chạm theo hướng y
+        if (
+            tankRect.left < obstacleRect.right &&
+            tankRect.right > obstacleRect.left &&
+            tankRect.top + dy < obstacleRect.bottom &&
+            tankRect.bottom + dy > obstacleRect.top
+        ) {
+            dy = 0;
+        }
+    }
+
+    return { dx, dy };
+}
+
+// Di chuyển xe tăng với kiểm tra va chạm
+function moveTank(tank, dx, dy) {
+    const gameRect = gameArea.getBoundingClientRect();
+
+    // Kiểm tra va chạm với vật cản trước khi di chuyển
+    let { dx: newDx, dy: newDy } = checkTankCollision(tank, dx, dy);
+
+    let newLeft = tank.offsetLeft + newDx;
+    let newTop = tank.offsetTop + newDy;
+
+    // Kiểm tra va chạm với biên của gameArea
+    if (newLeft < 0) newLeft = 0;
+    if (newTop < 0) newTop = 0;
+    if (newLeft + tank.clientWidth > gameRect.width) newLeft = gameRect.width - tank.clientWidth;
+    if (newTop + tank.clientHeight > gameRect.height) newTop = gameRect.height - tank.clientHeight;
+
+    // Cập nhật vị trí xe tăng
+    tank.style.left = newLeft + 'px';
+    tank.style.top = newTop + 'px';
+}
+
+// Hàm bắn đạn
+function shootBullet(shooter, target, speed) {
+    let bullet = document.createElement('div');
+    bullet.classList.add('bullet');
+    bullet.style.left = shooter.offsetLeft + 15 + 'px';
+    bullet.style.top = shooter.offsetTop + 15 + 'px';
+    gameArea.appendChild(bullet);
+
+    let angle = Math.atan2(target.offsetTop - shooter.offsetTop, target.offsetLeft - shooter.offsetLeft);
+    let dx = Math.cos(angle) * speed;
+    let dy = Math.sin(angle) * speed;
+
+    let bulletInterval = setInterval(() => {
+        // Kiểm tra va chạm và phản xạ đạn
+        const collisionResult = checkBulletCollision(bullet, dx, dy);
+        dx = collisionResult.dx;
+        dy = collisionResult.dy;
+
+        bullet.style.left = bullet.offsetLeft + dx + 'px';
+        bullet.style.top = bullet.offsetTop + dy + 'px';
+
+        const bulletRect = bullet.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+
+        // Kiểm tra va chạm với xe tăng đối thủ
+        if (bulletRect.left < targetRect.right &&
+            bulletRect.right > targetRect.left &&
+            bulletRect.top < targetRect.bottom &&
+            bulletRect.bottom > targetRect.top) {
+
+            bullet.remove();
+            clearInterval(bulletInterval);
+
+            if (shooter === tank1) {
+                score1++;
+                score1Element.textContent = score1;
+            } else {
+                score2++;
+                score2Element.textContent = score2;
+            }
+
+            // Kiểm tra kết thúc game
+            checkGameEnd();
+        }
+
+        // Kiểm tra nếu viên đạn ra khỏi gameArea thì xóa nó
+        const gameBounds = gameArea.getBoundingClientRect();
+        if (
+            bulletRect.left < gameBounds.left ||
+            bulletRect.right > gameBounds.right ||
+            bulletRect.top < gameBounds.top ||
+            bulletRect.bottom > gameBounds.bottom
+        ) {
+            bullet.remove();
+            clearInterval(bulletInterval);
+        }
+    }, 1000 / 60);
+}
+
+// Hàm kiểm tra xem có ai đạt đủ điểm chưa
+function checkGameEnd() {
+    if (score1 >= maxScore) {
+        endGame('Player 1');
+    } else if (score2 >= maxScore) {
+        endGame('Player 2');
+    }
+}
+// Bắt đầu game loop chính
+let gameLoopId;
+
+function gameLoop() {
+    if (keysPressed['w']) moveTank(tank1, 0, -movementSpeed);
+    if (keysPressed['s']) moveTank(tank1, 0, movementSpeed);
+    if (keysPressed['a']) moveTank(tank1, -movementSpeed, 0);
+    if (keysPressed['d']) moveTank(tank1, movementSpeed, 0);
+
+    if (keysPressed['ArrowUp']) moveTank(tank2, 0, -movementSpeed);
+    if (keysPressed['ArrowDown']) moveTank(tank2, 0, movementSpeed);
+    if (keysPressed['ArrowLeft']) moveTank(tank2, -movementSpeed, 0);
+    if (keysPressed['ArrowRight']) moveTank(tank2, movementSpeed, 0);
+
+    gameLoopId = requestAnimationFrame(gameLoop);
+}
+
+// Bắt đầu game loop
+gameLoopId = requestAnimationFrame(gameLoop);
+
+// Sự kiện bàn phím cho việc bắn đạn
+document.addEventListener('keydown', (event) => {
+    keysPressed[event.key] = true;
+
+    // Xe tăng 1 bắn bằng phím Q
+    if (event.key === 'q') {
+        shootBullet(tank1, tank2, bulletSpeed);
+    }
+    
+    // Xe tăng 2 bắn bằng phím P
+    if (event.key === 'p') {
+        shootBullet(tank2, tank1, bulletSpeed);
+    }
+});
+
+// Khi nhả phím
+document.addEventListener('keyup', (event) => {
+    keysPressed[event.key] = false;
+});
+// Đặt số điểm tối đa để kết thúc trò chơi
+const maxScore = 20;
+
+// Hàm kết thúc trò chơi
+function endGame(winner) {
+    // Hiển thị thông báo người chiến thắng
+    alert(`${winner} đã thắng trò chơi!`);
+    
+    // Tắt game loop
+    cancelAnimationFrame(gameLoopId);
+
+    // Khóa bàn phím và dừng bắn đạn
+    document.removeEventListener('keydown', handleKeyDown);
+    document.removeEventListener('keyup', handleKeyUp);
+}
+function endGame(winner) {
+    alert(`${winner} đã thắng trò chơi!`);
+
+    // Tắt game loop
+    cancelAnimationFrame(gameLoopId);
+    gameEnded = true;
+
+    // Lắng nghe sự kiện nhấp chuột để reset game
+    document.addEventListener('click', resetGame);
+}
+
+// Hàm reset game
+function resetGame() {
+    if (!gameEnded) return;
+
+    // Khởi động lại điểm số
+    score1 = 0;
+    score2 = 0;
+    score1Element.textContent = score1;
+    score2Element.textContent = score2;
+
+    // Đặt lại vị trí xe tăng
+    tank1.style.left = '100px';
+    tank1.style.top = '100px';
+    tank2.style.left = '600px';
+    tank2.style.top = '400px';
+
+    // Reset trạng thái game
+    gameEnded = false;
+    document.removeEventListener('click', resetGame);
+
+    // Khởi động lại game loop
+    gameLoopId = requestAnimationFrame(gameLoop);
+}
+
+// Hàm kiểm tra xem có ai đạt đủ điểm chưa
+function checkGameEnd() {
+    if (score1 >= maxScore) {
+        endGame('Player 1');
+    } else if (score2 >= maxScore) {
+        endGame('Player 2');
+    }
+}
+
+// Bắt đầu game loop
+gameLoop();
+
+</script>
+</body>
+</html>

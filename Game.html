@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trò chơi Tic-Tac-Toe</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            font-size: 36px;
+            text-align: center;
+            line-height: 100px;
+            border: 1px solid #333;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.8); /* nền trắng mờ */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('pngwing.com.png');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50; /* Màu xanh lá */
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049; /* Màu xanh lá đậm hơn khi hover */
+        }
+        main {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Trò chơi Tic-Tac-Toe</h2>
+    <div id="gameStatus"></div>
+    <div class="grid" id="board">
+        <div class="cell" onclick="makeMove(this, 0)"></div>
+        <div class="cell" onclick="makeMove(this, 1)"></div>
+        <div class="cell" onclick="makeMove(this, 2)"></div>
+        <div class="cell" onclick="makeMove(this, 3)"></div>
+        <div class="cell" onclick="makeMove(this, 4)"></div>
+        <div class="cell" onclick="makeMove(this, 5)"></div>
+        <div class="cell" onclick="makeMove(this, 6)"></div>
+        <div class="cell" onclick="makeMove(this, 7)"></div>
+        <div class="cell" onclick="makeMove(this, 8)"></div>
+    </div>
+    <button onclick="restartPage()">Chơi lại</button>
+
+    <script>
+        let board = ["", "", "", "", "", "", "", "", ""];
+        let currentPlayer = "X";
+        let gameActive = true;
+
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        function makeMove(cell, index) {
+            if (board[index] === "" && gameActive) {
+                board[index] = currentPlayer;
+                cell.textContent = currentPlayer;
+
+                if (checkWin()) {
+                    document.getElementById("gameStatus").textContent = `Người chơi ${currentPlayer} thắng cuộc!`;
+                    gameActive = false;
+                } else if (board.every(cell => cell !== "")) {
+                    document.getElementById("gameStatus").textContent = "Trò chơi hòa!";
+                    gameActive = false;
+                } else {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                }
+            }
+        }
+
+        function checkWin() {
+            for (let condition of winConditions) {
+                const [a, b, c] = condition;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function restartPage() {
+    board = ["", "", "", "", "", "", "", "", ""]; // Thiết lập lại bảng chơi, với mỗi ô trống
+    currentPlayer = "X";                          // Đặt người chơi hiện tại là "X" (người chơi đầu tiên)
+    gameActive = true;                            // Đặt trạng thái trò chơi là đang hoạt động
+    document.getElementById("gameStatus").textContent = ""; // Xóa nội dung hiển thị trạng thái trò chơi (như "X thắng", "Hòa", v.v.)
+    document.querySelectorAll(".cell").forEach(cell => cell.textContent = ""); // Xóa nội dung của từng ô (cell) trên bảng chơi
+}
+
+    </script>
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>Trang Hiện Tại</title>
+        <style>
+            /* Định dạng cho nút quay lại */
+            .back-button {
+                position: fixed;       /* Định vị cố định */
+                top: 20px;             /* Cách mép trên 20px */
+                left: 20px;            /* Cách mép trái 20px */
+                padding: 10px 20px;    /* Khoảng cách trong của nút */
+                font-size: 16px;       /* Kích thước chữ */
+                color: #fff;           /* Màu chữ */
+                background-color: #0245ff; /* Màu nền */
+                text-align: center;
+                text-decoration: none; /* Loại bỏ gạch chân */
+                border-radius: 5px;    /* Bo tròn góc */
+                transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+                z-index: 1000;         /* Đảm bảo nút luôn nằm trên các phần tử khác */
+            }
+    
+            /* Đổi màu khi di chuột qua */
+            .back-button:hover {
+                background-color: #45a049; /* Màu nền khi hover */
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- Nút quay lại trang chủ -->
+        <a href="home.html" class="back-button">Quay Lại Trang Chủ</a>
+    
+    </body>
+    </html>
+    
+
+    <main>
+        Chúc mọi người chơi game vui vẻ
+    </main>
+</body>
+</html>
