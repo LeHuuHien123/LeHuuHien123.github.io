@@ -1,0 +1,435 @@
+body {
+    background-color: #f4f7f6; /* Nền màu xám nhạt hiện đại */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font hiện đại hơn */
+    margin: 0;
+    color: #333; /* Màu chữ xám đậm dễ đọc */
+    line-height: 1.6; /* Tăng khoảng cách dòng để dễ đọc */
+}
+
+/* Navbar chính */
+.navbar {
+    background-color: #282c34; /* Nền tối cho navbar */
+    padding: 15px 50px; /* Tăng padding */
+    display: flex;
+    justify-content: space-between; /* Căn logo và menu ra hai bên */
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+    position: sticky; /* Giúp navbar dính khi cuộn */
+    top: 0;
+    z-index: 1000; /* Đảm bảo navbar luôn ở trên cùng */
+}
+
+/* Trong style.css */
+
+/* ... (các CSS chung như navbar, menu, logo img vẫn giữ nguyên) ... */
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* Có thể muốn màu link là màu chữ điện để nhất quán */
+    color: #fff; /* Màu link mặc định */
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-family: 'Electrolize', sans-serif;
+    font-size: 2.5em; /* Kích thước lớn hơn để hiệu ứng rõ nét */
+    font-weight: bold;
+    color: #fff; /* Màu chữ trung tâm là trắng sáng */
+    text-shadow: 
+        0 0 7px #fff,           /* Lớp sáng trắng gần nhất */
+        0 0 10px #0ff,          /* Lớp xanh cyan sáng */
+        0 0 20px #0ff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff; /* Lớp tỏa sáng lớn hơn, xanh cyan */
+    animation: electricSpark 0.8s infinite alternate; /* Thời gian nhanh hơn, tạo cảm giác giật */
+    -webkit-font-smoothing: antialiased; /* Tăng cường độ sắc nét font trên một số trình duyệt */
+}
+
+/* Hiệu ứng điện chạy ngang/nhấp nháy mạnh mẽ hơn */
+@keyframes electricSpark {
+    0% {
+        text-shadow: 
+            0 0 7px #fff,           /* Sáng trắng */
+            0 0 10px #0ff,          /* Sáng xanh */
+            0 0 20px #0ff,
+            0 0 40px #0ff,
+            0 0 80px #0ff,
+            0 0 90px #0ff,
+            0 0 100px #0ff,
+            0 0 150px #0ff;
+        transform: translateX(0); /* Vị trí ban đầu */
+    }
+    25% {
+        text-shadow: 
+            0 0 8px #fff,
+            0 0 12px #0ff,
+            0 0 25px #0ff,
+            0 0 50px #0ff,
+            0 0 90px #0ff,
+            0 0 100px #0ff,
+            0 0 110px #0ff,
+            0 0 160px #0ff;
+        transform: translateX(2px); /* Dịch chuyển nhẹ sang phải */
+    }
+    50% {
+        text-shadow: 
+            0 0 6px #fff,
+            0 0 8px #0ff,
+            0 0 15px #0ff,
+            0 0 30px #0ff,
+            0 0 70px #0ff,
+            0 0 80px #0ff,
+            0 0 90px #0ff,
+            0 0 140px #0ff;
+        transform: translateX(-2px); /* Dịch chuyển nhẹ sang trái */
+    }
+    75% {
+        text-shadow: 
+            0 0 9px #fff,
+            0 0 15px #0ff,
+            0 0 30px #0ff,
+            0 0 60px #0ff,
+            0 0 100px #0ff,
+            0 0 110px #0ff,
+            0 0 120px #0ff,
+            0 0 170px #0ff;
+        transform: translateX(1px); /* Dịch chuyển nhẹ khác */
+    }
+    100% {
+        text-shadow: 
+            0 0 7px #fff,
+            0 0 10px #0ff,
+            0 0 20px #0ff,
+            0 0 40px #0ff,
+            0 0 80px #0ff,
+            0 0 90px #0ff,
+            0 0 100px #0ff,
+            0 0 150px #0ff;
+        transform: translateX(0); /* Về vị trí ban đầu */
+    }
+}
+
+
+/* Điều chỉnh responsive cho logo và chữ nếu cần */
+@media (max-width: 768px) {
+    .logo a {
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo img {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .logo-text {
+        font-size: 1.8em; /* Kích thước nhỏ hơn trên mobile */
+    }
+}
+
+/* Menu chính */
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 35px; /* Tăng khoảng cách giữa các mục menu */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #f4f4f4; /* Màu chữ trắng sáng */
+    font-weight: 600; /* Tăng độ đậm font */
+    padding: 10px 15px;
+    display: block;
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+.menu a:hover {
+    color: #61dafb; /* Màu xanh lam nổi bật khi hover */
+}
+
+/* Submenu (menu con) */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #3a3f4a; /* Nền tối cho submenu */
+    top: 100%;
+    left: 0; /* Căn trái submenu */
+    list-style: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Đổ bóng đậm hơn */
+    padding: 10px 0;
+    border-radius: 5px; /* Bo góc nhẹ nhàng */
+    z-index: 10;
+    min-width: 180px; /* Tăng chiều rộng tối thiểu */
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.submenu li a {
+    padding: 12px 25px; /* Tăng padding cho các mục con */
+    color: #f4f4f4; /* Màu chữ trắng sáng */
+    display: block;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    transition: background 0.2s ease, color 0.2s ease; /* Hiệu ứng chuyển đổi */
+}
+
+.submenu li a:hover {
+    background: #4c525f; /* Nền xám đậm khi hover */
+    color: #61dafb; /* Màu chữ xanh lam khi hover */
+}
+
+/* Các phần bổ sung cho nội dung trang (ví dụ từ gợi ý HTML trước đó) */
+main {
+    padding: 20px 50px;
+}
+.hero-section {
+    /* Background */
+    background-image: url(https://img.websosanh.vn/v2/users/review/images/9ovq05v5l7bnb.jpg?compress=85);
+    background-size: cover; /* Quan trọng: để ảnh nền lấp đầy và cắt */
+    background-position: center; /* Căn giữa ảnh nền */
+    background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+
+    /* Các thuộc tính khác */
+    text-align: center;
+    padding: 80px 20px;
+    /* overflow: hidden;  Thường không cần thiết cho background-image vì nó không tràn ra */
+    margin-bottom: 40px;
+    border-radius: 10px;
+    color: white; /* Đổi màu chữ thành trắng để dễ nhìn trên nền ảnh tối */
+    min-height: 400px; /* Đặt chiều cao tối thiểu để ảnh nền hiển thị rõ */
+    display: flex; /* Sử dụng flexbox để căn giữa nội dung theo chiều dọc nếu muốn */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    color: #fdfdfd;
+    margin-bottom: 15px;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    color: #ffffff; 
+    margin-bottom: 30px;
+}
+
+.btn-shop-now {
+    display: inline-block;
+    background-color: #007bff; /* Nút màu xanh dương */
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-shop-now:hover {
+    background-color: #0056b3;
+}
+
+.featured-products {
+    margin-bottom: 40px;
+}
+
+.featured-products h2, .about-us h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #282c34;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.featured-products h2::after, .about-us h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #007bff;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-item img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.product-item h3 {
+    font-size: 1.4em;
+    color: #282c34;
+    margin-bottom: 10px;
+}
+
+.product-item .price {
+    font-size: 1.3em;
+    color: #007bff;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-item button {
+    background-color: #28a745; /* Nút màu xanh lá cây */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.product-item button:hover {
+    background-color: #218838;
+}
+
+.about-us {
+    background-color: #e9ecef;
+    padding: 50px 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.about-us p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1em;
+    color: #555;
+}
+
+footer {
+    background-color: #282c34;
+    color: #f4f4f4;
+    text-align: center;
+    padding: 30px 50px;
+    font-size: 0.9em;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+.social-links a {
+    color: #f4f4f4;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #61dafb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .submenu {
+        position: static; /* Cho submenu hiển thị ngay bên dưới trên mobile */
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent; /* Nền trong suốt */
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    .submenu li a {
+        background-color: #4c525f; /* Nền cho mục submenu trên mobile */
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+
+    .hero-section {
+        padding: 60px 15px;
+    }
+
+    .hero-section h1 {
+        font-size: 2em;
+    }
+
+    .hero-section p {
+        font-size: 1em;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr; /* Một cột trên màn hình nhỏ */
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .social-links {
+        margin-top: 10px;
+    }
+
+    .social-links a {
+        margin: 0 10px;
+    }
+}
