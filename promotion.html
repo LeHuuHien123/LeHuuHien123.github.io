@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Khuyến Mãi - Techzone</title>
+    <link rel="stylesheet" href="style.css">
+     <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS cho Body và Navbar giữ nguyên hoặc đã điều chỉnh trước đó */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4; /* Nền nhẹ nhàng */
+        }
+
+        .navbar {
+            background-color: #6d6864;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo a {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar img {
+            height: 60px;
+            margin-right: 10px;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .promotion-section {
+            max-width: 1200px;
+            margin: 20px auto; /* Căn giữa và có khoảng cách trên dưới */
+            padding: 20px;
+            background-color: #fff; /* Nền trắng cho phần nội dung chính */
+            border-radius: 10px; /* Bo góc nhẹ cho toàn bộ section */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ đẹp hơn */
+        }
+
+        .promotion-section h2 {
+            text-align: center;
+            color: #d70018;
+            margin-bottom: 30px;
+            font-size: 2em; /* Tiêu đề lớn hơn */
+        }
+
+        .promotion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Hơi nhỏ lại để vừa hơn */
+            gap: 25px; /* Tăng khoảng cách giữa các thẻ */
+        }
+
+        /* ----- Cải thiện CSS cho Promo Card ----- */
+        .promo-card {
+            background-color: white;
+            border-radius: 12px; /* Bo góc nhiều hơn */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ mềm mại hơn */
+            overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài bo góc */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng mượt mà */
+            display: flex; /* Dùng flexbox để căn chỉnh nội dung */
+            flex-direction: column; /* Xếp ảnh và nội dung theo cột */
+        }
+
+        .promo-card:hover {
+            transform: translateY(-8px); /* Nhảy lên nhiều hơn */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Bóng đổ đậm hơn khi hover */
+        }
+
+        .promo-card img {
+            width: 100%;
+            height: 180px; /* Tăng chiều cao ảnh một chút */
+            object-fit: cover; /* Đảm bảo ảnh vừa khung và không bị méo */
+            border-bottom: 1px solid #eee; /* Đường kẻ nhẹ phân cách ảnh và nội dung */
+        }
+
+        .promo-content {
+            padding: 20px; /* Tăng padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Đẩy nút xuống dưới cùng */
+            flex-grow: 1; /* Cho phép nội dung chiếm hết không gian còn lại */
+        }
+
+        .promo-content h3 {
+            font-size: 1.25em; /* Tiêu đề lớn hơn */
+            margin: 0 0 10px;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .promo-content p {
+            margin: 0 0 15px; /* Tăng khoảng cách dưới đoạn văn */
+            font-size: 0.95em;
+            color: #555;
+            flex-grow: 1; /* Cho phép đoạn văn chiếm không gian để đẩy nút xuống */
+        }
+
+        .promo-content .btn {
+            display: inline-block;
+            background-color: #d70018; /* Màu đỏ chủ đạo */
+            color: white;
+            padding: 10px 18px; /* Tăng padding nút */
+            text-decoration: none;
+            border-radius: 6px; /* Bo góc nút */
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            align-self: flex-start; /* Căn nút sang trái trong flex container */
+        }
+
+        .promo-content .btn:hover {
+            background-color: #b70015; /* Màu đỏ đậm hơn khi hover */
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* ----- Cải thiện CSS cho Modal ----- */
+       .modal {
+            display: none; /* Đảm bảo chỉ có display: none; ở đây */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); /* Giữ nguyên hoặc thay đổi tùy theo ý bạn */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto; /* Căn giữa nếu không dùng flex */
+            padding: 30px; /* Tăng padding */
+            border-radius: 15px; /* Bo góc nhiều hơn */
+            max-width: 650px; /* Tăng chiều rộng tối đa */
+            width: 90%; /* Chiếm 90% chiều rộng màn hình */
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Bóng đổ mạnh hơn */
+            animation: fadeIn 0.3s ease-out; /* Thêm hiệu ứng fade in */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content img#modalImage {
+            width: 100%;
+            max-height: 250px; /* Chiều cao tối đa cho ảnh trong modal */
+            object-fit: contain; /* Đảm bảo ảnh hiển thị đầy đủ, không bị cắt */
+            margin-bottom: 20px; /* Khoảng cách dưới ảnh */
+            border-radius: 8px; /* Bo góc cho ảnh trong modal */
+            border: 1px solid #eee; /* Viền nhẹ cho ảnh */
+            display: block; /* Đảm bảo ảnh không có khoảng trắng thừa */
+        }
+
+        .modal-content h3 {
+            color: #d70018;
+            font-size: 1.8em; /* Tiêu đề lớn hơn */
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .modal-content p {
+            font-size: 1.1em; /* Cỡ chữ lớn hơn */
+            line-height: 1.8; /* Khoảng cách dòng lớn hơn */
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 32px; /* Nút đóng lớn hơn */
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #555;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+            .navbar img {
+                height: 50px;
+            }
+            .menu {
+                gap: 15px;
+            }
+            .promotion-section {
+                padding: 15px;
+                margin: 15px auto;
+            }
+            .promotion-section h2 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            .promo-card img {
+                height: 150px;
+            }
+            .promo-content {
+                padding: 15px;
+            }
+            .promo-content h3 {
+                font-size: 1.1em;
+            }
+            .promo-content p {
+                font-size: 0.9em;
+            }
+            .modal-content {
+                max-width: 90%;
+                padding: 20px;
+            }
+            .modal-content h3 {
+                font-size: 1.5em;
+            }
+            .modal-content p {
+                font-size: 1em;
+            }
+            .close {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+            .menu {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .menu li {
+                width: 100%;
+                text-align: center;
+            }
+            .promotion-grid {
+                grid-template-columns: 1fr; /* Một cột trên màn hình nhỏ */
+            }
+            .promo-card img {
+                height: 200px; /* Tăng chiều cao để nhìn rõ hơn trên di động */
+            }
+            .modal-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="promoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <img id="modalImage" src="" alt="" style="width: 100%; max-height: 250px; object-fit: contain; margin-bottom: 20px; border-radius: 8px; border: 1px solid #eee; display: block;">
+        <h3 id="modalTitle">Tiêu đề khuyến mãi</h3>
+        <p id="modalDate">Ngày diễn ra: ...</p>
+        <p id="modalCondition">Thể lệ: ...</p>
+        <p id="modalTarget">Đối tượng áp dụng: ...</p>
+    </div>
+</div>
+
+   <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="a.jpg" alt="Tech Accessories Shop Logo">
+                <span class="logo-text">Techzone</span>
+            </a>
+        </div>
+        <input id="search-box" name="search" autocomplete="off" type="text" placeholder="Nhập từ khóa tìm kiếm...">
+        <button type="submit"><i class="fa fa-search"></i>Tìm kiếm</button>
+        <ul class="menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li class="dropdown">
+                <a href="index.html#featured-products">Sản Phẩm</a>
+                <ul class="submenu">
+                    <li><a href="#" data-category="Màn Hình Máy Tính">Màn Hình Máy Tính</a></li>
+                    <li><a href="#" data-category="Bàn Ghế Gaming">Bàn Ghế Gaming</a></li>
+                    <li><a href="#" data-category="Loa - Tai Nghe">Loa - Tai Nghe</a></li>
+                    <li><a href="#" data-category="Bàn Phím Cơ">Bàn Phím Cơ</a></li>
+                    <li><a href="#" data-category="Hàng Cũ Giá Rẻ">Hàng Cũ Giá Rẻ</a></li>
+                    <li><a href="#" data-category="Phụ Kiện Khác">Phụ Kiện Khác</a></li>
+                    <li><a href="#" data-category="Chuột">Chuột</a></li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="promotion.html">Khuyến Mãi</a>
+            </li>
+            <li class="dropdown">
+                <a href="contact.html">Liên Hệ</a></li>
+            
+            <li class="cart-icon-item">
+                <a href="giohang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i> Giỏ Hàng
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+            <li><button class="BtnLogin" id="openLoginFormBtn">Đăng Nhập</button></li>
+        </ul>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="form-box login" id="loginForm">
+        <span class="icon-close" id="closeLoginForm"><i class="fas fa-times"></i></span> <h2>Đăng Nhập</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="loginEmail" name="email" placeholder="Nhập Email hoặc Tên đăng nhập" required />
+            <input type="password" id="loginPassword" name="password" placeholder="Nhập Mật Khẩu" required />
+            <button type="submit">Đăng Nhập</button>
+        </form>
+        <p>Chưa có tài khoản? <a href="#" class="register-link">Đăng Ký</a> </p>
+        <a href="#">Quên mật khẩu</a>
+    </div>
+
+    <div class="form-box register" id="registerForm">
+        <span class="icon-close" id="closeRegisterForm"><i class="fas fa-times"></i></span> <h2>Đăng Ký</h2>
+        <form onsubmit="handleRegister(event)">
+            <input type="text" id="registerName" placeholder="Tên" required />
+            <input type="email" id="registerEmail" name="email" placeholder="Nhập Email hoặc Tên đăng nhập" required />
+            <input type="password" id="registerPassword" name="password" placeholder="Nhập Mật Khẩu" required />
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <p>Đã có tài khoản? <a href="#" class="login-link">Đăng Nhập</a></p>
+    </div>
+
+    <main>
+        <section class="promotion-section">
+            <h2>Chương trình khuyến mãi</h2>
+            <div class="promotion-grid" id="promotion-grid-container">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Cửa hàng phụ kiện Công Nghệ. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script>
+        const promotions = [
+            {
+                Image:"https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square-1024x1024.png",
+                title: "Giảm 250.000₫ khi thanh toán qua Momo",
+                date: "01/07/2025 - 10/10/2025",
+                condition: "Áp dụng cho đơn hàng từ 1.000.000₫ trở lên khi thanh toán bằng ví Momo.",
+                target: "Tất cả khách hàng mua online và tại cửa hàng."
+            },
+            {
+                Image:"https://tse1.mm.bing.net/th/id/OIP.5MXxbbtog8TSceQ9uT496wHaDS?pid=Api&P=0&h=180",
+                title: "Giảm 10% giá trị sản phẩm cho sinh viên",
+                date: "01/09/2025 - 30/09/2025",
+                condition: "Xuất trình thẻ sinh viên tại quầy khi thanh toán.",
+                target: "Sinh viên các trường đại học/cao đẳng toàn quốc."
+            },
+            {
+                Image:"https://cf.shopee.vn/file/d4e15dc10e6d7372fa97afe5b4f83f7b",
+                title: "Mua bàn phím, chuột không dây tặng lót chuột ligitech",
+                date: "01/07/2025 - 31/07/2025",
+                condition: "Áp dụng khi mua combo bàn phím + chuột không dây.",
+                target: "Tất cả khách hàng."
+            },
+            {
+                Image:"https://tse2.mm.bing.net/th/id/OIP.JjHRAQqlzZMbpxFQVTfrGQHaEb?pid=Api&P=0&h=180",
+                title: "Tặng phiếu mua hàng 100.000đ khi mua từ 1.000.000đ",
+                date: "01/07/2025 - 31/12/2025",
+                condition: "Phiếu có thể sử dụng cho đơn hàng kế tiếp.",
+                target: "Chỉ áp dụng tại cửa hàng."
+            },
+            {
+                Image:"https://img.gotit.vn/gotit_website_photos/4/cloud1/qua-tang-tri-an-khach-hang-giup-duy-tri-su-ket-noi-giua-doanh-nghiep-va-khach-hang-got-it.png",
+                title: "Khuyến mãi đặc biệt cho khách hàng thứ 1000",
+                date: "Áp dụng đến khi đủ 1000 khách đầu tiên",
+                condition: "Khách hàng thứ 1000 sẽ được tặng phần quà trị giá 2.000.000đ.",
+                target: "Tự động xác nhận theo số thứ tự mua hàng."
+            },
+            {
+                Image:"https://tse4.mm.bing.net/th/id/OIP.j6nCm-BI_5beKXhbPxoPkAHaEB?pid=Api&P=0&h=180",
+                title: "Ưu đãi dành riêng cho khách hàng thân thiết",
+                date: "01/07/2025 - 31/07/2025",
+                condition: "Phải có tài khoản và lịch sử mua hàng tối thiểu 5 đơn.",
+                target: "Khách hàng thân thiết có tài khoản Techzone."
+            }
+        ];
+
+        const modal = document.getElementById("promoModal");
+        const modalImage = document.getElementById("modalImage"); // Lấy thẻ img của modal
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDate = document.getElementById("modalDate");
+        const modalCondition = document.getElementById("modalCondition");
+        const modalTarget = document.getElementById("modalTarget");
+
+        function openModal(index) {
+            const promo = promotions[index]; 
+            
+            modalImage.src = promo.Image; // Gán đường dẫn hình ảnh cho modal
+            modalImage.alt = promo.title; // Gán alt text cho hình ảnh
+
+            modalTitle.innerText = promo.title;
+            modalDate.innerText = "Ngày diễn ra: " + promo.date;
+            modalCondition.innerText = "Thể lệ: " + promo.condition;
+            modalTarget.innerText = "Đối tượng áp dụng: " + promo.target;
+            modal.style.display = "flex"; // Đổi từ block sang flex để căn giữa modal
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Đóng modal khi nhấn ra ngoài
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // --- Đoạn mã để tạo động các thẻ khuyến mãi ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const promotionGridContainer = document.getElementById('promotion-grid-container');
+            promotionGridContainer.innerHTML = ''; 
+
+            promotions.forEach((promo, index) => {
+                const promoCard = document.createElement('div');
+                promoCard.classList.add('promo-card');
+
+                promoCard.innerHTML = `
+                    <img src="${promo.Image}" alt="${promo.title}">
+                    <div class="promo-content">
+                        <h3>${promo.title}</h3>
+                        <p>${promo.date ? 'Ngày diễn ra: ' + promo.date : ''}</p>
+                        <a href="javascript:void(0);" class="btn" onclick="openModal(${index})">Xem chi tiết</a>
+                    </div>
+                `;
+                promotionGridContainer.appendChild(promoCard);
+            });
+        });
+    </script>
+    <script src="js.js"></script> </body>
+</html>

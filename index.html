@@ -6,80 +6,143 @@
     <title>Cửa hàng phụ kiện Công Nghệ</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">
-    <a href="#">
-        <img src="a.jpg" alt="Tech Accessories Shop Logo"> 
-        <span class="logo-text">Techzone</span>
-    </a> 
-</div>
+            <a href="#">
+                <img src="a.jpg" alt="Tech Accessories Shop Logo">
+                <span class="logo-text">Techzone</span>
+            </a>
+        </div>
+        <input id="search-box" name="search" autocomplete="off" type="text" placeholder="Nhập từ khóa tìm kiếm...">
+        <button type="submit"><i class="fa fa-search"></i>Tìm kiếm</button>
         <ul class="menu">
             <li><a href="#">Trang Chủ</a></li>
             <li class="dropdown">
-                <a href="#">Sản Phẩm</a>
+                <a href="index.html#featured-products">Sản Phẩm</a>
                 <ul class="submenu">
-                    <li><a href="#">Màn Hình Máy Tính</a></li>
-                    <li><a href="#">Ghế Công Thái Học</a></li>
-                    <li><a href="#">Loa - Tai Nghe</a></li>
-                    <li><a href="#">Bàn Gaming</a></li>
-                    <li><a href="#">Ghế Gaming</a></li>
-                    <li><a href="#">Bàn Phím Cơ</a></li>
-                    <li><a href="#">Hàng Cũ Giá Rẻ</a></li>
-                    <li><a href="#">Phụ Kiện Khác</a></li>
-                    <li><a href="#">Chuột</a></li>
-                    <li><a href="#">Bàn Phím Custom</a></li>
-                    <li><a href="#">Linh Kiện PC</a></li>
-                    <li><a href="#">Tất Cả</a></li>
+                    <li><a href="#" data-category="Màn Hình Máy Tính">Màn Hình Máy Tính</a></li>
+                    <li><a href="#" data-category="Bàn Ghế Gaming">Bàn Ghế Gaming</a></li>
+                    <li><a href="#" data-category="Loa - Tai Nghe">Loa - Tai Nghe</a></li>
+                    <li><a href="#" data-category="Bàn Phím Cơ">Bàn Phím Cơ</a></li>
+                    <li><a href="#" data-category="Hàng Cũ Giá Rẻ">Hàng Cũ Giá Rẻ</a></li>
+                    <li><a href="#" data-category="Phụ Kiện Khác">Phụ Kiện Khác</a></li>
+                    <li><a href="#" data-category="Chuột">Chuột</a></li>
+                    <li><a href="#" data-category="Linh Kiện PC">Linh Kiện PC</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#">Khuyến Mãi</a>
+                <a href="promotion.html">Khuyến Mãi</a>
             </li>
             <li class="dropdown">
-                <a href="#">Liên Hệ</a>
+                <a href="contact.html">Liên Hệ</a>
             </li>
+            <li class="cart-icon-item">
+                <a href="giohang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i> Giỏ Hàng
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+            <li><button class="BtnLogin" id="openLoginFormBtn">Đăng Nhập</button></li>
         </ul>
     </nav>
 
-    <main>
-        <section class="hero-section">
-            <h1>Khám phá thế giới công nghệ đỉnh cao</h1>
-            <p>Phụ kiện chất lượng, giá cả phải chăng, nâng tầm trải nghiệm của bạn.</p>
-            <a href="#" class="btn-shop-now">Mua sắm ngay</a>
-        </section>
+    <div class="overlay" id="overlay"></div>
 
-        <section class="featured-products">
+    <div class="form-box login" id="loginForm">
+        <span class="icon-close" id="closeLoginForm"><i class="fas fa-times"></i></span> <h2>Đăng Nhập</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="loginEmail" name="email" placeholder="Nhập Email hoặc Tên đăng nhập" required />
+            <input type="password" id="loginPassword" name="password" placeholder="Nhập Mật Khẩu" required />
+            <button type="submit">Đăng Nhập</button>
+        </form>
+        <p>Chưa có tài khoản? <a href="#" class="register-link">Đăng Ký</a> </p>
+        <a href="#">Quên mật khẩu</a>
+    </div>
+
+    <div class="form-box register" id="registerForm">
+        <span class="icon-close" id="closeRegisterForm"><i class="fas fa-times"></i></span> <h2>Đăng Ký</h2>
+        <form onsubmit="handleRegister(event)">
+            <input type="text" id="registerName" placeholder="Tên" required />
+            <input type="email" id="registerEmail" name="email" placeholder="Nhập Email hoặc Tên đăng nhập" required />
+            <input type="password" id="registerPassword" name="password" placeholder="Nhập Mật Khẩu" required />
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <p>Đã có tài khoản? <a href="#" class="login-link">Đăng Nhập</a></p>
+    </div>
+
+    <main>
+       <div class="banner">
+            <div class="banner-container"> 
+                <div class="banner-slider">
+                    <div class="slide fade">
+                        <img src="banners/banner1.jpg" alt="Banner 1">
+                    </div>
+                    <div class="slide fade">
+                        <img src="banners/banner2.jpg" alt="Banner 2">
+                    </div>
+                    <div class="slide fade">
+                        <img src="banners/banner3.jpg" alt="Banner 3">
+                    </div>
+                    <div class="slide fade">
+                        <img src="banners/banner4.jpg" alt="Banner 4">
+                    </div>
+                    <div class="slide fade">
+                        <img src="banners/banner5.jpg" alt="Banner 5">
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                </div>
+            </div>
+            </div>
+
+        <div class="company-logos company-list" id="company-logos">
+        </div>
+
+        <section id="featured-products" class="featured-products">
             <h2>Sản phẩm nổi bật</h2>
-            <div class="product-grid">
+            <div class="product-grid" id="product-grid-featured">
                 <div class="product-item">
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/b/a/ban-phim-co-aula-s2022-blue-switch-3.png" alt="Màn Hình Máy Tính XYZ">
+                    <img src="img/product/bp1.png" alt="Bàn Phím Cơ Aula S2022 Blue Switch">
                     <h3>Bàn phím cơ Aula S2022 Blue Switch</h3>
                     <p class="price">449.000đ VNĐ</p>
-                    <button>Thêm vào giỏ</button>
+                    <button class="add-to-cart-btn" data-name="Bàn phím cơ Aula S2022 Blue Switch" data-price="449000" data-image="img/product/bp1.png">Thêm vào giỏ</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/c/h/chuot-choi-game-co-day-logitech-g102-lightsync-8000dpi-4.png" alt="Bàn Phím Cơ ABC">
+                    <img src="img/product/c1.png" alt="Chuột có dây Gaming Logitech G102 LightSync Gen 2">
                     <h3>Chuột có dây Gaming Logitech G102 LightSync Gen 2</h3>
                     <p class="price">409.000đ VNĐ</p>
-                    <button>Thêm vào giỏ</button>
+                    <button class="add-to-cart-btn" data-name="Chuột có dây Gaming Logitech G102 LightSync Gen 2" data-price="409000" data-image="img/product/c1.png">Thêm vào giỏ</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_16__6_21.png" alt="Chuột Gaming DEF">
+                    <img src="img/product/mh1.png" alt="Màn hình thông minh LG MyView 25SR50F 25 inch">
                     <h3>Màn hình thông minh LG MyView 25SR50F 25 inch</h3>
                     <p class="price">2.890.000đ VNĐ</p>
-                    <button>Thêm vào giỏ</button>
+                    <button class="add-to-cart-btn" data-name="Màn hình thông minh LG MyView 25SR50F 25 inch" data-price="2890000" data-image="img/product/mh1.png">Thêm vào giỏ</button>
                 </div>
                 <div class="product-item">
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/h/a/havit-tw917-pro-2.jpg" alt="Tai Nghe GHI">
+                    <img src="img/product/tn1.png" alt="Tai nghe Bluetooth True Wireless Havit TW917 Pro">
                     <h3>Tai nghe Bluetooth True Wireless Havit TW917 Pro </h3>
                     <p class="price">390.000đ VNĐ</p>
-                    <button>Thêm vào giỏ</button>
+                    <button class="add-to-cart-btn" data-name="Tai nghe Bluetooth True Wireless Havit TW917 Pro" data-price="390000" data-image="img/product/tn1.png">Thêm vào giỏ</button>
                 </div>
-                </div>
+            </div>
         </section>
 
+        <section id="category-products" class="featured-products" style="display: none;">
+            <h2>Sản phẩm theo danh mục: <span id="category-title"></span></h2>
+            <div class="product-grid" id="category-product-grid">
+                </div>
+        </section>
         <section class="about-us">
             <h2>Về chúng tôi</h2>
             <p>Cửa hàng phụ kiện Công Nghệ cam kết mang đến những sản phẩm chất lượng cao và dịch vụ tốt nhất cho khách hàng đam mê công nghệ. Chúng tôi luôn cập nhật những xu hướng mới nhất để bạn có trải nghiệm tuyệt vời.</p>
@@ -90,13 +153,16 @@
         <div class="footer-content">
             <p>&copy; 2025 Cửa hàng phụ kiện Công Nghệ. Tất cả quyền được bảo lưu.</p>
             <br>
-            <p>&copy; Địa Chỉ: Khóm 3, Phường 5, Xã Tân Phành, Tỉnh Cà Mau</p>
-            <div class="social-links">
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">Zalo</a>
-            </div>
+            <p>&copy; Địa Chỉ: Khóm 3, Phường 5, Xã Tân Phường, Tỉnh Cà Mau</p>
         </div>
-    </footer>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        </footer>
+
+    <script src="js.js"></script>
+    <script src="giohang.js"></script> 
 </body>
 </html>

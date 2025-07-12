@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Liên Hệ - Techzone</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="a.jpg" alt="Tech Accessories Shop Logo">
+                <span class="logo-text">Techzone</span>
+            </a>
+        </div>
+        <input id="search-box" name="search" autocomplete="off" type="text" placeholder="Nhập từ khóa tìm kiếm...">
+        <button type="submit"><i class="fa fa-search"></i>Tìm kiếm</button>
+        <ul class="menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li class="dropdown">
+                <a href="index.html#featured-products">Sản Phẩm</a>
+                <ul class="submenu">
+                    <li><a href="#" data-category="Màn Hình Máy Tính">Màn Hình Máy Tính</a></li>
+                    <li><a href="#" data-category="Bàn Ghế Gaming">Bàn Ghế Gaming</a></li>
+                    <li><a href="#" data-category="Loa - Tai Nghe">Loa - Tai Nghe</a></li>
+                    <li><a href="#" data-category="Bàn Phím Cơ">Bàn Phím Cơ</a></li>
+                    <li><a href="#" data-category="Hàng Cũ Giá Rẻ">Hàng Cũ Giá Rẻ</a></li>
+                    <li><a href="#" data-category="Phụ Kiện Khác">Phụ Kiện Khác</a></li>
+                    <li><a href="#" data-category="Chuột">Chuột</a></li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="promotion.html">Khuyến Mãi</a>
+            </li>
+            <li class="dropdown">
+                <a href="contact.html">Liên Hệ</a></li>
+            
+            <li class="cart-icon-item">
+                <a href="giohang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i> Giỏ Hàng
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+            <li><button class="BtnLogin" id="openLoginFormBtn">Đăng Nhập</button></li>
+        </ul>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="form-box login" id="loginForm">
+        <span class="icon-close" id="closeLoginForm"><i class="fas fa-times"></i></span> <h2>Đăng Nhập</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="loginEmail" name="email" placeholder="Nhập Email hoặc Tên đăng nhập" required />
+            <input type="password" id="loginPassword" name="password" placeholder="Nhập Mật Khẩu" required />
+            <button type="submit">Đăng Nhập</button>
+        </form>
+        <p>Chưa có tài khoản? <a href="#" class="register-link">Đăng Ký</a> </p>
+        <a href="#">Quên mật khẩu</a>
+    </div>
+
+    <div class="form-box register" id="registerForm">
+        <span class="icon-close" id="closeRegisterForm"><i class="fas fa-times"></i></span> <h2>Đăng Ký</h2>
+        <form onsubmit="handleRegister(event)">
+            <input type="text" id="registerName" placeholder="Tên" required />
+            <input type="email" id="registerEmail" name="email" placeholder="Nhập Email hoặc Tên đăng nhập" required />
+            <input type="password" id="registerPassword" name="password" placeholder="Nhập Mật Khẩu" required />
+            <button type="submit">Đăng Ký</button>
+        </form>
+        <p>Đã có tài khoản? <a href="#" class="login-link">Đăng Nhập</a></p>
+    </div>
+
+    <main>
+        <section class="contact-section">
+            <h2>Liên Hệ</h2>
+            <div class="contact-content">
+                <p><i class="fas fa-map-marker-alt" style="color: #e74c3c;"></i> Địa chỉ: Khóm 3, Phường 5, Xã Tân Phành, Tỉnh Cà Mau</p>
+                <p><i class="fas fa-phone" style="color: #27ae60;"></i> Điện thoại: <a href="tel:0912345678">0912 345 678</a></p>
+                <p><i class="fas fa-envelope" style="color: #2980b9;"></i> Email: <a href="mailto:techzone.camau@gmail.com">techzone.camau@gmail.com</a></p>
+                <p>
+                    <img src="https://banghieuviet.org/wp-content/uploads/2023/08/zalo-logo.jpg" alt="Zalo" style="height: 20px; vertical-align: middle; margin-right: 5px;">
+                    Zalo: <a href="#">Nhắn tin ngay</a>
+                </p>
+                <p><img src="https://cdn-icons-png.flaticon.com/128/733/733547.png" alt="Facebook" style="height: 20px; vertical-align: middle; margin-right: 5px;"> Facebook: <a href="https://web.facebook.com/me/">TechZone Cà Mau</a></p>
+            </div>
+
+            <h2>Địa chỉ cửa hàng trên bản đồ</h2>
+            <div class="map-container">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d29950.24742163425!2d105.16234235605914!3d9.184869232915483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zS2jDs20gMywgUGjGsOG7nW5nIDUsIFTDom4gUGjDoG5oLCBDw6AgTWF1!5e1!3m2!1svi!2s!4v1752027944088!5m2!1svi!2s" width="1400" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Cửa hàng phụ kiện Công Nghệ. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+    <script src="js.js"></script>
+</body>
+</html>

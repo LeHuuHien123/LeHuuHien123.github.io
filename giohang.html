@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - Cửa hàng phụ kiện Công Nghệ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gioHang.css">
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="a.jpg" alt="Tech Accessories Shop Logo">
+                <span class="logo-text">Techzone</span>
+            </a>
+        </div>
+        <input id="search-box" name="search" autocomplete="off" type="text" placeholder="Nhập từ khóa tìm kiếm...">
+        <button type="submit"><i class="fa fa-search"></i>Tìm kiếm</button>
+        <ul class="menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li class="dropdown">
+                <a href="index.html#featured-products">Sản Phẩm</a>
+                <ul class="submenu">
+                    <li><a href="#" data-category="Màn Hình Máy Tính">Màn Hình Máy Tính</a></li>
+                    <li><a href="#" data-category="Bàn Ghế Gaming">Bàn Ghế Gaming</a></li>
+                    <li><a href="#" data-category="Loa - Tai Nghe">Loa - Tai Nghe</a></li>
+                    <li><a href="#" data-category="Bàn Phím Cơ">Bàn Phím Cơ</a></li>
+                    <li><a href="#" data-category="Hàng Cũ Giá Rẻ">Hàng Cũ Giá Rẻ</a></li>
+                    <li><a href="#" data-category="Phụ Kiện Khác">Phụ Kiện Khác</a></li>
+                    <li><a href="#" data-category="Chuột">Chuột</a></li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="promotion.html">Khuyến Mãi</a>
+            </li>
+            <li class="dropdown">
+                <a href="contact.html">Liên Hệ</a></li>
+            
+            <li class="cart-icon-item">
+                <a href="giohang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i> Giỏ Hàng
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+            <li><button class="BtnLogin" id="openLoginFormBtn">Đăng Nhập</button></li>
+        </ul>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="wrapper" id="loginForm" style="display: none;">
+        <span class="icon-close" id="closeLoginForm"><ion-icon name="close-outline"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Đăng Nhập</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Mật Khẩu</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> Nhớ mật khẩu</label>
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn">Đăng Nhập</button>
+                <div class="login-register">
+                    <p>Bạn chưa có tài khoản? <a href="#" class="register-link">Đăng Ký</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="wrapper" id="registerForm" style="display: none;">
+        <span class="icon-close" id="closeRegisterForm"><ion-icon name="close-outline"></ion-icon></span>
+        <div class="form-box register">
+            <h2>Đăng Ký</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Tên người dùng</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Mật Khẩu</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> Tôi đồng ý với các điều khoản & điều kiện</label>
+                </div>
+                <button type="submit" class="btn">Đăng Ký</button>
+                <p>Đã có tài khoản? <a href="#" class="login-link">Đăng Nhập</a></p>
+            </form>
+        </div>
+    </div>
+
+    <main class="cart-page-main">
+        <section class="cart-section">
+            <h2>Giỏ Hàng Của Bạn</h2>
+            <div id="cart-items-container" class="cart-items-grid">
+                <p id="empty-cart-message" style="text-align: center;">Giỏ hàng của bạn đang trống.</p>
+            </div>
+            <div class="cart-summary">
+                <div class="cart-total">
+                    Tổng cộng: <span id="cart-total-amount">0đ</span>
+                </div>
+                <button id="checkout-btn" class="checkout-btn" disabled>Tiến Hành Thanh Toán</button>
+                <button id="clear-cart-btn" class="clear-cart-btn">Xóa Hết Giỏ Hàng</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Cửa hàng phụ kiện Công Nghệ. Tất cả quyền được bảo lưu.</p>
+            <br>
+            <p>&copy; Địa Chỉ: Khóm 3, Phường 5, Xã Tân Phường, Tỉnh Cà Mau</p>
+        </div>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+            </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js.js"></script> 
+    <script src="giohang.js"></script> 
+</body>
+</html>
