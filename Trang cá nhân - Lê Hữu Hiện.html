@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang cá nhân - Lê Hữu Hiện</title>
+    <link rel="stylesheet" href="mysite.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <div class="profile-header">
+                <img src="unnamed.jpg" alt="Ảnh đại diện" class="profile-pic">
+                <div class="profile-info-basic">
+                    <h2><span class="sparkle-text">Lê Hữu Hiện</span></h2>
+                    <p>Sinh viên Công Nghệ Thông Tin</p>
+                </div>
+            </div>
+
+            <div class="info-section is-visible">
+                <h3>Thông tin cá nhân</h3>
+                <p><strong>Tên:</strong> Lê Hữu Hiện</p>
+                <p><strong>Tuổi:</strong> 20</p>
+                <p><strong>Ngày sinh:</strong> 14/12/2005</p>
+                <p><strong>SĐT:</strong> 0827908299</p>
+                <p><strong>Địa chỉ:</strong> Khóm 4, Phường 6, Thành Phố Cà Mau</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Kỹ năng mềm</h3>
+                <ul>
+                    <li>Kỹ năng tư duy phản biện</li>
+                    <li>Kỹ năng thuyết trình</li>
+                    <li>Kỹ năng giao tiếp, khánh tiết</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>Thành tích</h3>
+                <ul>
+                    <h4>Bóng đá</h4>
+                    <li>2 vàng</li>
+                    <li>2 bạc</li>
+                    <li>1 đồng</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>Liên Hệ Với Tôi</h3>
+                <p><strong>Email:</strong> lehuuhien678@gmail.com</p>
+                <p><strong>Số điện thoại:</strong> 0827908299</p>
+                <p><strong>Facebook:</strong> <a href="https://www.facebook.com/hh141205/" target="_blank">Facebook Cá Nhân</a></p>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="info-section is-visible">
+                <h3>Giới Thiệu Bản Thân</h3>
+                <p>Chào mừng bạn đến với trang cá nhân của tôi. Tôi là Lê Hữu Hiện, một người trẻ đầy nhiệt huyết với mong muốn học hỏi và phát triển bản thân trong lĩnh vực công nghệ thông tin.</p>
+                <p>Tôi luôn tìm kiếm những thử thách mới và cơ hội để nâng cao kiến thức, kỹ năng. Với tinh thần cầu tiến và khả năng thích nghi nhanh chóng, tôi tin rằng mình có thể đóng góp vào các dự án thú vị và mang lại giá trị thiết thực.</p>
+            </div>
+
+            <div class="info-section is-visible">
+                <h3>Kế Hoạch Học Tập</h3>
+                <p>Kế hoạch của em là thiết kế một web đặt món online tại nhà hàng đạt sao Michelin.</p>
+                <h4>Ngôn ngữ sử dụng:</h4>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>Sở Thích</h3>
+                <ul>
+                    <li>Bóng đá</li>
+                    <li>Nghe nhạc</li>
+                    <li>Ăn vặt</li>
+                </ul>
+                <h4>Khả năng:</h4>
+                <ul>
+                    <li>Thích nghi với môi trường mới tốt</li>
+                    <li>Luôn bình tĩnh giải quyết tình huống khó</li>
+                    <li>Tìm ra lỗi và sửa lỗi tốt</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>Học vấn</h3>
+                <p>Tốt Nghiệp cấp 3</p>
+                <ul>
+                    <h4>Đại học</h4>
+                    <li>Công nghệ thông tin<ol>Đang cập nhật</ol></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    // Lắng nghe sự kiện 'DOMContentLoaded': Đảm bảo rằng mã này chỉ chạy khi toàn bộ tài liệu HTML đã được tải và phân tích cú pháp.
+
+    const infoSections = document.querySelectorAll('.info-section');
+    // Tìm tất cả các phần tử có class 'info-section': Chọn tất cả các thẻ HTML có class là 'info-section'
+    // và lưu chúng vào biến 'infoSections'. Đây là các khối nội dung mà bạn muốn áp dụng hiệu ứng.
+
+    const checkVisibility = () => {
+        // Định nghĩa một hàm mũi tên (arrow function) tên là 'checkVisibility': Hàm này sẽ kiểm tra xem các phần tử có hiển thị trên màn hình hay không.
+
+        infoSections.forEach(section => {
+            // Lặp qua từng phần tử 'info-section': Với mỗi 'section' trong danh sách 'infoSections', thực hiện các hành động sau:
+
+            const sectionTop = section.getBoundingClientRect().top;
+            // Lấy vị trí trên cùng của phần tử: Tính khoảng cách từ mép trên của cửa sổ trình duyệt (viewport) đến mép trên của 'section'.
+
+            const sectionBottom = section.getBoundingClientRect().bottom;
+            // Lấy vị trí dưới cùng của phần tử: Tính khoảng cách từ mép trên của cửa sổ trình duyệt (viewport) đến mép dưới của 'section'.
+
+            const windowHeight = window.innerHeight;
+            // Lấy chiều cao của cửa sổ trình duyệt: Lấy chiều cao hiện tại của vùng hiển thị trên trình duyệt.
+
+          
+            if (sectionTop < windowHeight * 0.85 && sectionBottom > 0) {
+                // Điều kiện để phần tử xuất hiện:
+               
+                section.classList.add('is-visible');
+                
+            } else {
+                
+                section.classList.remove('is-visible');
+                
+            }
+        });
+    };
+
+
+    // Chạy khi tải trang lần đầu:
+    checkVisibility()
+
+    // Chạy khi cuộn trang:
+    window.addEventListener('scroll', checkVisibility);
+    
+});
+    </script>
+
+</body></html>
